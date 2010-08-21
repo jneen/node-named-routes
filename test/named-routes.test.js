@@ -1,4 +1,4 @@
-var Route = require('./../lib/grout')
+var Route = require('./../lib/named-routes')
 
 module.exports = {
   "it's a function": function(assert) {
