@@ -14,7 +14,7 @@ module.exports = {
     assert.equal('/foo/zwibble/baz/42', route.path('zwibble', 42))
   },
   "route with a url": function(assert) {
-    Route.home('http://www.example.com/')
+    Route.home = 'http://www.example.com/'
     var route = new Route('foo/:bar')
     assert.equal('http://www.example.com/foo/3', route.url(3))
   },
@@ -37,4 +37,24 @@ module.exports = {
       route.path({bar:'zorb',bizzle:'bozzle'})
     )
   }
-}
+};
+
+(function() {
+  var routes = Route.draw('http://mysite.com/', {
+    foo: '/foo/:id',
+    bar: '/bar/:id',
+    bar_baz: '/bar/:id/baz/:baz_id'
+  })
+
+  module.exports["Route.map()"] = function(assert) {
+    assert.ok(routes.foo)
+    assert.ok(routes.bar)
+    assert.ok(routes.bar_baz)
+  }
+
+  module.exports["Route.map() creates routes"] = function(assert) {
+    assert.equal('/foo/76', routes.foo.path(76))
+    assert.equal('/bar/77', routes.bar.path({id:77}))
+    assert.equal('/bar/77/baz/88', routes.bar_baz.path({id:77,baz_id:88}))
+  }
+})()
