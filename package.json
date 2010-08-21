@@ -1,0 +1,7 @@
+{
+  "name": "named-routes",
+  "version": "0.1.0",
+  "author": "Jay Adkisson <j4yferd@gmail.com>",
+  "description": "framework-agnostic named routes for node",
+  "main": "lib/named-routes"
+}
